@@ -32,9 +32,6 @@ export default {
     clickBtn() {
       this.visibleDialog = true;
     },
-    closeDialog() {
-      this.visibleDialog = false;
-    },
     validForm(payload) {
       this.visibleDialog = false;
       this.formData = payload;
