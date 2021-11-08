@@ -1,28 +1,44 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-main>
+      <v-btn @click="clickBtn"> click me </v-btn>
+      <Dialog v-model="visibleDialog">
+        <Form @valid="validForm" />
+      </Dialog>
+
+      <v-text-field v-model="formData" :disable="true" />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Dialog from "./components/ui/Dialog.vue";
+import Form from "./components/Form.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
-</script>
+    Dialog,
+    Form,
+  },
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  data() {
+    return {
+      visibleDialog: false,
+      formData: null,
+    };
+  },
+
+  methods: {
+    clickBtn() {
+      this.visibleDialog = true;
+    },
+    closeDialog() {
+      this.visibleDialog = false;
+    },
+    validForm(payload) {
+      this.visibleDialog = false;
+      this.formData = payload;
+    },
+  },
+};
+</script>
